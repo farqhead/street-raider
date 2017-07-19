@@ -1,0 +1,39 @@
+<html>
+    <head>
+        <script type="text/javascript" charset="utf-8">
+            var socket = new WebSocket('ws://' + document.domain + ':' + location.port + '/data');
+            socket.addEventListener('open', function (event) {
+            });
+            socket.addEventListener('message', function (message) {
+                setTimeout(function() {
+                    if (message && message.data) {
+                        var data = JSON.parse(message.data)
+                        for (key in data) {
+                            var element = document.getElementById(key)
+                            if (element) {
+                                element.textContent = data[key];
+                            }
+                        }
+                    }
+                });
+            });
+        </script>
+    </head>
+    <body>
+        <table>
+            <tbody>
+                <tr><td>Time</td><td id="time"></td></tr>
+                <tr><td>Timestamp</td><td id="timestamp"></td></tr>
+                <tr><td>Latitude</td><td id="latitude"></td></tr>
+                <tr><td>Longitude</td><td id="longitude"></td></tr>
+                <tr><td>Altitude</td><td id="altitude"></td></tr>
+                <tr><td>Mode</td><td id="mode"></td></tr>
+                <tr><td>Temperature</td><td id="temperature"></td></tr>
+                <tr><td>Acceleration X</td><td id="acceleration_x"></td></tr>
+                <tr><td>Acceleration Y</td><td id="acceleration_y"></td></tr>
+                <tr><td>Acceleration Z</td><td id="acceleration_z"></td></tr>
+            </tbody>
+        </table>
+    </body>
+</html>
+
